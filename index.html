@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>飞机大战(AircraftBattle)</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<!--<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="js/flexible.js" type="text/javascript" charset="utf-8"></script>-->
+		<script src="js/gameEngine.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/enemy.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/myPlane.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bullet.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="main_body" class="main">
+			<ul id="list">
+				<li value="1000">困难(Difficulties)</li>
+				<li value="500">中等(Moderate)</li>
+				<li value="250">简单(Simple)</li>
+				<li value="80">新手(Newbie)</li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+		window.onload = function() {
+				var oList = document.getElementById("list");
+				var allLi = oList.getElementsByTagName("li");
+				for (var i = 0; i < allLi.length; i++) {
+					allLi[i].onclick = function() {
+						//1、把oList消失
+						oList.parentNode.removeChild(oList);
+						//2、设置游戏难度等级: 根据子弹的发射频率
+						var fireInterval = this.value;
+						//将这个频率设置为我的飞机的发射子弹的频率
+						myPlane.fireInterval = fireInterval;
+						//3、开始游戏
+						/*
+						* 游戏引擎(导演) : 对象(只有一个)
+						* 控制游戏进度: 开始游戏, 游戏过程, 结束游戏
+						 * 加载游戏
+						 * 碰撞检测
+						* 创建我的飞机:发射子弹
+						* 创建敌机
+						* 移动飞机
+						 */
+						 /*
+							* 演员:
+							* 我的飞机: 对象(只有一个)
+							* 敌机: 类(构造函数)
+							* 子弹: 类(构造函数)
+							* 开始启动游戏,进入加载游戏界面
+						*/
+						gameEngine.start();
+
+						document.addEventListener("touchstart", function(evt) {
+							console.log("document.ontouchstart false!");
+							evt.preventDefault();
+							return false;
+						 });
+					}
+				}
+      		}
+		</script>
+
+	</body>
+</html>
